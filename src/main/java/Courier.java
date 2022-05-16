@@ -3,7 +3,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 
-//коммент
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

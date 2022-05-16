@@ -3,7 +3,6 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-//коммент
 public class CourierClient {
 
     public static String keysValue = null;
@@ -18,7 +17,6 @@ public class CourierClient {
                 .body(courier)
                 .when()
                 .post(Endpoints.COURIER_URL);
-        response.path("ok").toString();
         status = response.path("ok");
     }
 
@@ -32,7 +30,7 @@ public class CourierClient {
         keysValue = response.path("message");
     }
 
-    public void createWithouSomeCred(Courier courier) {
+    public void createWithoutSomeCred(Courier courier) {
         response = given().log().all()
                 .baseUri(Endpoints.URL)
                 .header("Content-type", "application/json")
@@ -52,7 +50,7 @@ public class CourierClient {
         courierId = response.path("id");
     }
 
-    public void loginnWithWrong(CourierCredentials creds) {
+    public void loginWithWrong(CourierCredentials creds) {
         response = given().log().all()
                 .baseUri(Endpoints.URL)
                 .header("Content-type", "application/json")

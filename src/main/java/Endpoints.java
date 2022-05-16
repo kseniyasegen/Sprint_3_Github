@@ -1,5 +1,5 @@
 public class Endpoints {
-    //коммент
+
     public static final String URL = "https://qa-scooter.praktikum-services.ru/api/v1";
     public static final String COURIER_URL = "/courier";
     public static final String COURIER_URL_LOGIN = COURIER_URL + "/login";

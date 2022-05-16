@@ -1,6 +1,5 @@
 import lombok.Data;
 
-//коммент
 @Data
 public class CourierCredentials {
     private String login;

@@ -6,17 +6,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-//коммент
 @RunWith(Parameterized.class)
 @AllArgsConstructor
 public class OrderCreateTest {
 
     private String firstName;
     private String lastName;
-    private String adress;
+    private String address;
     private int metroStation;
     private String phone;
     private int rentTime;
@@ -43,12 +41,12 @@ public class OrderCreateTest {
             "тело ответа содержит track.")
     public void orderCreateParametrized() {
         OrdersData ordersData = new OrdersData();
-        Order order = new Order(firstName, lastName, adress, metroStation, phone, rentTime, deliveryDate, comment, color);
+        Order order = new Order(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment, color);
         ordersData.createOrder(order);
         //проверить, что ожидаемый статус код соответствует фактическому
         assertEquals(expectedStatusCode, OrdersData.response.statusCode());
         //проверить, что track не пустой
-        ordersData.response.then().assertThat().body("track", Matchers.notNullValue());
+        OrdersData.response.then().assertThat().body("track", Matchers.notNullValue());
         //отменить заказ
         ordersData.cancelOrder();
     }

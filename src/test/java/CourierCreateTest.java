@@ -3,10 +3,9 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//коммент
 public class CourierCreateTest {
 
     private CourierClient courierClient;
@@ -28,7 +27,7 @@ public class CourierCreateTest {
         CourierCredentials creds = CourierCredentials.from(courier);
         courierClient.login(creds);
         //проверка результата теста
-        assertTrue(CourierClient.status);
+        assertEquals(CourierClient.status, true);
         //удалить курьера
         courierClient.delete(CourierClient.courierId);
     }
@@ -46,9 +45,9 @@ public class CourierCreateTest {
         //создать курьера с теми же данными
         courierClient.createSameCourier(courier);
         //проверить, что возвращается статус код ошибки
-        assertTrue(CourierClient.response.statusCode() == 409);
+        assertEquals(CourierClient.response.statusCode(), 409);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Этот логин уже используется. Попробуйте другой."));
+        assertEquals(CourierClient.keysValue, "Этот логин уже используется. Попробуйте другой.");
     }
 
     @Test
@@ -58,11 +57,11 @@ public class CourierCreateTest {
     public void courierCreateWithoutLogin() {
         //дернуть ручку с твумя ключами (нет одного обязательного)
         Courier courier = new Courier("", "Segen002", "Segen002");
-        courierClient.createWithouSomeCred(courier);
+        courierClient.createWithoutSomeCred(courier);
         //проверить, что возвращается статус код ошибки
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для создания учетной записи"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для создания учетной записи");
     }
 
     @Test
@@ -72,11 +71,11 @@ public class CourierCreateTest {
     public void courierCreateWithoutPassword() {
         //дернуть ручку с твумя ключами (нет одного обязательного)
         Courier courier = new Courier("Segen002", "", "Segen002");
-        courierClient.createWithouSomeCred(courier);
+        courierClient.createWithoutSomeCred(courier);
         //проверить, что возвращается статус код ошибки
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для создания учетной записи"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для создания учетной записи");
     }
 
     @Test
@@ -86,10 +85,10 @@ public class CourierCreateTest {
     public void courierCreateWithoutLoginAndPassword() {
         //дернуть ручку с твумя ключами (нет одного обязательного)
         Courier courier = new Courier("", "", "");
-        courierClient.createWithouSomeCred(courier);
+        courierClient.createWithoutSomeCred(courier);
         //проверить, что возвращается статус код ошибки
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для создания учетной записи"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для создания учетной записи");
     }
 }

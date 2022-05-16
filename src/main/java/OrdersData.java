@@ -2,7 +2,6 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-//коммент
 public class OrdersData {
 
     public static Response response;

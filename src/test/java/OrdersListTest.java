@@ -4,9 +4,9 @@ import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//коммент
 public class OrdersListTest {
 
     private OrdersData ordersData;
@@ -23,7 +23,7 @@ public class OrdersListTest {
         OrdersList ordersList = new OrdersList(1, "", 10, 1);
         ordersData.ordersList(ordersList);
         //проверить, что статус код 200
-        assertTrue(ordersData.response.statusCode() == 200);
+        assertEquals(OrdersData.response.statusCode(), 200);
         //проверить, что orders не пустой
         OrdersData.response.then().assertThat().body("orders", Matchers.notNullValue());
     }

@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-//коммент
 public class CourierLoginTest {
 
     private int courierId;
@@ -29,7 +28,7 @@ public class CourierLoginTest {
         CourierCredentials creds = CourierCredentials.from(courier);
         courierClient.login(creds);
         //проверить, что возвращается статус код 200
-        assertTrue(CourierClient.response.statusCode() == 200);
+        assertEquals(CourierClient.response.statusCode(), 200);
         //проверить, что возвращается id
         assertNotEquals(0, courierClient.courierId);
         //удалить курьера
@@ -43,11 +42,11 @@ public class CourierLoginTest {
     public void courierLoginWithoutLogin() {
         //дернуть ручку с конструктором, в котором одно обязательное поле
         CourierCredentials creds = new CourierCredentials("", "Segen0123");
-        courierClient.loginnWithWrong(creds);
+        courierClient.loginWithWrong(creds);
         //проверить, что возвращается статус код 400
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для входа"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для входа");
     }
 
     @Test
@@ -57,11 +56,11 @@ public class CourierLoginTest {
     public void courierLoginWithoutPassword() {
         //дернуть ручку с конструктором, в котором одно обязательное поле
         CourierCredentials creds = new CourierCredentials("Segen0123", "");
-        courierClient.loginnWithWrong(creds);
+        courierClient.loginWithWrong(creds);
         //проверить, что возвращается статус код 400
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для входа"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для входа");
     }
 
     @Test
@@ -71,11 +70,11 @@ public class CourierLoginTest {
     public void courierLoginWithoutLoginAndPassword() {
         //дернуть ручку с конструктором, в котором одно обязательное поле
         CourierCredentials creds = new CourierCredentials("", "");
-        courierClient.loginnWithWrong(creds);
+        courierClient.loginWithWrong(creds);
         //проверить, что возвращается статус код 400
-        assertTrue(CourierClient.response.statusCode() == 400);
+        assertEquals(CourierClient.response.statusCode(), 400);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Недостаточно данных для входа"));
+        assertEquals(CourierClient.keysValue, "Недостаточно данных для входа");
     }
 
     @Test
@@ -83,12 +82,12 @@ public class CourierLoginTest {
     @Description("Система вернёт ошибку, если неправильно указать логин или пароль;\n" +
             "Если авторизоваться под несуществующим пользователем, запрос возвращает ошибку;\n")
     public void courierLoginWithWrongCreds() {
-        //указать несуществующие логие и пароль
+        //указать несуществующие логин и пароль
         CourierCredentials creds = new CourierCredentials("Segen0123", "Segen0123");
-        courierClient.loginnWithWrong(creds);
+        courierClient.loginWithWrong(creds);
         //проверить, что возвращается статус код 400
-        assertTrue(CourierClient.response.statusCode() == 404);
+        assertEquals(CourierClient.response.statusCode(), 404);
         //проверить, что возвращается текст ошибки
-        assertTrue(CourierClient.keysValue.equals("Учетная запись не найдена"));
+        assertEquals(CourierClient.keysValue, "Учетная запись не найдена");
     }
 }
